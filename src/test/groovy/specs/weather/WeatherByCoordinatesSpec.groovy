@@ -1,5 +1,6 @@
-package api.weather
+package specs.weather
 
+import http.HTTPCreator
 import spock.lang.Specification
 
 class WeatherByCoordinatesSpec extends Specification {
