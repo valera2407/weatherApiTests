@@ -11,7 +11,12 @@ class WeatherByCityIdSpec extends Specification {
         def httpRequest = new HTTPCreator('https://api.openweathermap.org')
 
         when: "set path and city ID, response content type and API key"
-        def httpResponse = httpRequest.getRequest('/data/2.5/forecast', [id: cityID, mode: contentType, APPID: '187c05111c48c6e4033a664f5951aece'])
+        def httpResponse
+        if (contentType == 'json')
+            httpResponse = httpRequest.getRequestJSON('/data/2.5/forecast', [id: cityID, mode: contentType, APPID: '187c05111c48c6e4033a664f5951aece'])
+        else if (contentType == 'xml') {
+            httpResponse = httpRequest.getRequestXML('/data/2.5/forecast', [id: cityID, mode: contentType, APPID: '187c05111c48c6e4033a664f5951aece'])
+        }
 
         then: "check that response come different content type and city ID corresponds to city name"
         assert httpRequest.header.'Content-Type' == contentTypeResponse

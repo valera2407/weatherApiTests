@@ -12,19 +12,18 @@ class TestOtherParametersSpec extends Specification {
         def mapParm = [q: city, lang: lan, cnt: listSize, units: unitsType, APPID: '187c05111c48c6e4033a664f5951aece']
 
         when: "Sent request"
-        def httpResponse = httpRequest.getRequest('/data/2.5/forecast', mapParm)
+        def httpResponse = httpRequest.getRequestJSON('/data/2.5/forecast', mapParm)
 
         then: "check that response have different unit type, language and count"
-        assert httpResponse.list.weather.get(0).description > weather
+        assert httpResponse.list.weather.get(0).description == weather
         assert httpResponse.list.wind.get(0).speed == windSpeed
         assert httpResponse.cnt == count
-        assert httpResponse.list.dt_txt == answerTime
 
         where:
-        city       | lan  | listSize | unitsType  || weather                 | windSpeed | count | answerTime
-        'Neyland'  | 'fr' | 3        | 'metric'   || ['légère pluie']        | 6.14      | 3     | ['2021-10-20 15:00:00', '2021-10-20 18:00:00', '2021-10-20 21:00:00']
-        'Terni'    | 'sl' | 1        | 'imperial' || ['pretrgana oblačnost'] | 8.81      | 1     | ['2021-10-20 15:00:00']
-        'Dedenëvo' | 'ru' | 2        | 'metric'   || ['пасмурно']            | 7.7       | 2     | ['2021-10-20 15:00:00', '2021-10-20 18:00:00']
+        city       | lan  | listSize | unitsType  || weather          | windSpeed | count
+        'Neyland'  | 'fr' | 3        | 'metric'   || ['légère pluie'] | 7.76      | 3
+        'Terni'    | 'sl' | 1        | 'imperial' || ['oblačno']      | 6.55      | 1
+        'Dedenëvo' | 'ru' | 2        | 'metric'   || ['пасмурно']     | 3.73       | 2
     }
 
 }

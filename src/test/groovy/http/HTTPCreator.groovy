@@ -14,9 +14,30 @@ class HTTPCreator {
         httpBase = httpRequest
     }
 
-    def getRequest(pathRequest, queryRequest) {
+    def getRequestJSON(pathRequest, queryRequest) {
         def http = new HTTPBuilder(httpBase)
         http.request(Method.GET, ContentType.JSON) {
+
+            uri.path = pathRequest
+            uri.query = queryRequest
+
+            response.success = {
+                resp, body ->
+                    header = resp.headers
+                    bodyResponse = body
+            }
+
+            response.failure = {
+                resp, body ->
+                    header = resp.headers
+                    bodyResponse = body
+            }
+        }
+    }
+
+    def getRequestXML(pathRequest, queryRequest) {
+        def http = new HTTPBuilder(httpBase)
+        http.request(Method.GET, ContentType.XML) {
 
             uri.path = pathRequest
             uri.query = queryRequest
