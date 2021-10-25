@@ -12,7 +12,6 @@ class DaileBaseNegativeSpec extends Specification {
 
         when: "Sent request"
         def httpResponse = httpRequest.getRequest('/data/2.5/forecast/daily', query)
-        println httpResponse
 
         then: "Check that response have status cod 404"
         assert httpResponse.cod == '404'

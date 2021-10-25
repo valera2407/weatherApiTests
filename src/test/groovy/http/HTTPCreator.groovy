@@ -2,9 +2,7 @@ package http
 
 import groovyx.net.http.ContentType
 import groovyx.net.http.HTTPBuilder
-import groovyx.net.http.HttpResponseException
 import groovyx.net.http.Method
-
 
 class HTTPCreator {
 
