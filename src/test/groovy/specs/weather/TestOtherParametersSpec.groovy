@@ -20,10 +20,10 @@ class TestOtherParametersSpec extends Specification {
         assert httpResponse.cnt == count
 
         where:
-        city       | lan  | listSize | unitsType  || weather          | windSpeed | count
-        'Neyland'  | 'fr' | 3        | 'metric'   || ['légère pluie'] | 7.76      | 3
-        'Terni'    | 'sl' | 1        | 'imperial' || ['oblačno']      | 6.55      | 1
-        'Dedenëvo' | 'ru' | 2        | 'metric'   || ['пасмурно']     | 3.73       | 2
+        city       | lan  | listSize | unitsType  || weather       | windSpeed | count
+        'Neyland'  | 'fr' | 3        | 'metric'   || ['couvert']   | 8.74      | 3
+        'Terni'    | 'sl' | 1        | 'imperial' || ['rahel dež'] | 4.68      | 1
+        'Dedenëvo' | 'ru' | 2        | 'metric'   || ['пасмурно']  | 5.93      | 2
     }
 
 }

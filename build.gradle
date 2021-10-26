@@ -19,3 +19,93 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+task negativeDailyTests(type: Test) {
+    useJUnitPlatform()
+    filter {
+        includeTestsMatching "*specs.daily.DailyBaseNegativeSpec.*"
+        includeTestsMatching "*specs.daily.DailyAPISpec.Send request with isn`t right API key"
+        includeTestsMatching "*specs.daily.DailyLanguageSpec.Verify that response have isn`t default language"
+        includeTestsMatching "*specs.daily.DailyCountSpec.Check that response can`t have size smaller that 1 and bigger that 17"
+    }
+}
+
+task positiveDailyTests(type: Test, dependsOn: negativeDailyTests) {
+    useJUnitPlatform()
+    filter {
+        includeTestsMatching "*specs.daily.DailyBasePositiveSpec.*"
+        includeTestsMatching "*specs.daily.DailyAPISpec.Send request with right API key"
+        includeTestsMatching "*specs.daily.DailyLanguageSpec.Verify language response"
+        includeTestsMatching "*specs.daily.DailyCountSpec.Check that response can have different size"
+    }
+}
+
+task dailyTests(type: Test) {
+    useJUnitPlatform()
+    filter {
+        includeTestsMatching "*specs.daily.*"
+    }
+}
+
+task weatherTests(type: Test, dependsOn: positiveDailyTests) {
+    useJUnitPlatform()
+    filter {
+        includeTestsMatching "*specs.weather.*"
+    }
+}
+
+negativeDailyTests.doFirst {
+    def str = 'Negative tests was started'
+    println '-'*str.size()
+    println str
+    println '-'*str.size()
+}
+
+negativeDailyTests.doLast {
+    def str = 'Negative tests was finished'
+    println '-'*str.size()
+    println str
+    println '-'*str.size()
+}
+
+positiveDailyTests.doFirst {
+    def str = 'Positive tests was started'
+    println '-'*str.size()
+    println str
+    println '-'*str.size()
+}
+
+positiveDailyTests.doLast {
+    def str = 'Positive tests was finished'
+    println '-'*str.size()
+    println str
+    println '-'*str.size()
+}
+
+dailyTests.doFirst {
+    def str = 'Daily tests was started'
+    println '-'*str.size()
+    println str
+    println '-'*str.size()
+}
+
+dailyTests.doLast {
+    def str = 'Daily tests was finished'
+    println '-'*str.size()
+    println str
+    println '-'*str.size()
+}
+
+weatherTests.doFirst {
+    def str = 'Weather tests was started'
+    println '-'*str.size()
+    println str
+    println '-'*str.size()
+}
+
+weatherTests.doLast {
+    def str = 'Weather tests was finished'
+    println '-'*str.size()
+    println str
+    println '-'*str.size()
+}

@@ -18,9 +18,9 @@ class WeatherByCityNameSpec extends Specification {
         assert httpResponse.list.size == numberOfDays
 
         where:
-        city           | lan  | listSize || weather                   | numberOfDays
-        'London'       | 'en' | 1        || ['broken clouds']            | 1
-        'Kharkiv'      | 'ru' | 3        || ['переменная облачность'] | 3
-        'Rechtenstein' | 'de' | 2        || ['Bedeckt']               | 2
+        city           | lan  | listSize || weather              | numberOfDays
+        'London'       | 'en' | 1        || ['few clouds'] | 1
+        'Kharkiv'      | 'ru' | 3        || ['ясно']             | 3
+        'Rechtenstein' | 'de' | 2        || ['Leichter Regen']   | 2
     }
 }

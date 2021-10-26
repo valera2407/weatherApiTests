@@ -25,6 +25,6 @@ class WeatherByCoordinatesSpec extends Specification {
         54.339008 | -1.43243  | 'metric'
 
         cityName << ['Volodymyrivka', 'Uman\'', 'Northallerton']
-        tempMax << [[9.7], [43.12], [10.86]]
+        tempMax << [[9.75], [46.26], [10.51]]
     }
 }

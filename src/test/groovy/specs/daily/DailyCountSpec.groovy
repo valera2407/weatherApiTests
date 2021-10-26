@@ -30,7 +30,7 @@ class DailyCountSpec extends Specification {
         size << [16, 1, 9]
     }
 
-    def "Check that ressponse can have different size"() {
+    def "Check that response can`t have size smaller that 1 and bigger that 17"() {
         given: "set base URI, geographic coordinate and list size"
         def httpRequest = new HTTPCreator('https://api.openweathermap.org')
         def query = [lon: longitude, lat: latitude, cnt: count, APPID: 'b2ce5b9466a4cdcec5e7a6bf11465c5a']

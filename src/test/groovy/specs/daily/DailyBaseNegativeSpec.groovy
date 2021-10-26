@@ -3,7 +3,7 @@ package specs.daily
 import http.HTTPCreator
 import spock.lang.Specification
 
-class DaileBaseNegativeSpec extends Specification {
+class DailyBaseNegativeSpec extends Specification {
 
     def "Check daily forecast with isn`t right city name"() {
         given: "set base URI, city name and API key"
