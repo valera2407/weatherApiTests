@@ -8,10 +8,10 @@ class WeatherByCoordinatesSpec extends Specification {
     def "check weather by geographic coordinates"() {
 
         given: "set base URI"
-        def httpRequest = new HTTPCreator('https://api.openweathermap.org')
+        def httpRequest = new HTTPCreator('https://api.openweathermap.org', 'json')
 
         when: "set path and latitude, longitude, unit type, count and API key"
-        def httpResponse = httpRequest.getRequestJSON('/data/2.5/forecast',
+        def httpResponse = httpRequest.getRequest('/data/2.5/forecast',
                 [lat: latitude, lon: longitude, units: unitsType, cnt: 1, APPID: '187c05111c48c6e4033a664f5951aece'])
 
         then: "check that geographic coordinates corresponds to city name and response come back with different unit type"
@@ -25,6 +25,6 @@ class WeatherByCoordinatesSpec extends Specification {
         54.339008 | -1.43243  | 'metric'
 
         cityName << ['Volodymyrivka', 'Uman\'', 'Northallerton']
-        tempMax << [[9.75], [46.26], [10.51]]
+        tempMax << [[11.37], [50.31], [15.64]]
     }
 }

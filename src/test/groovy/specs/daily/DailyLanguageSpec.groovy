@@ -7,11 +7,11 @@ class DailyLanguageSpec extends Specification {
 
     def "Verify language response"() {
         given: "Set base URI, language and city ID"
-        def httpRequest = new HTTPCreator('https://api.openweathermap.org')
+        def httpRequest = new HTTPCreator('https://api.openweathermap.org', 'json')
         def query = [id: cityId, lang: language, APPID: 'b2ce5b9466a4cdcec5e7a6bf11465c5a']
 
         when: "Sent request"
-        def httpResponse = httpRequest.getRequestJSON('/data/2.5/forecast/daily', query)
+        def httpResponse = httpRequest.getRequest('/data/2.5/forecast/daily', query)
 
         then: "Check that response have status code 200"
         assert httpResponse.cod == '200'
@@ -28,11 +28,11 @@ class DailyLanguageSpec extends Specification {
 
     def "Verify that response have isn`t default language"() {
         given: "Set base URI, language and city ID"
-        def httpRequest = new HTTPCreator('https://api.openweathermap.org')
+        def httpRequest = new HTTPCreator('https://api.openweathermap.org', 'json')
         def query = [id: cityId, lang: language, APPID: 'b2ce5b9466a4cdcec5e7a6bf11465c5a']
 
         when: "Sent request"
-        def httpResponse = httpRequest.getRequestJSON('/data/2.5/forecast/daily', query)
+        def httpResponse = httpRequest.getRequest('/data/2.5/forecast/daily', query)
 
         then: "Check that response have status code 200"
         assert httpResponse.cod == '200'

@@ -9,36 +9,26 @@ class HTTPCreator {
     def httpBase
     def header
     def bodyResponse
+    def contType
 
-    HTTPCreator(httpRequest) {
+
+    HTTPCreator(httpRequest, contentType) {
         httpBase = httpRequest
-    }
-
-    def getRequestJSON(pathRequest, queryRequest) {
-        def http = new HTTPBuilder(httpBase)
-        http.request(Method.GET, ContentType.JSON) {
-
-            uri.path = pathRequest
-            uri.query = queryRequest
-
-            response.success = {
-                resp, body ->
-                    header = resp.headers
-                    bodyResponse = body
-            }
-
-            response.failure = {
-                resp, body ->
-                    header = resp.headers
-                    bodyResponse = body
-            }
+        switch (contentType){
+            case 'json':
+                contType = ContentType.JSON
+                break
+            case 'xml':
+                contType = ContentType.XML
+                break
+            default:
+                println 'Please use content type JSON or XML'
         }
     }
 
-    def getRequestXML(pathRequest, queryRequest) {
+    def getRequest(pathRequest, queryRequest) {
         def http = new HTTPBuilder(httpBase)
-        http.request(Method.GET, ContentType.XML) {
-
+        http.request(Method.GET, contType) {
             uri.path = pathRequest
             uri.query = queryRequest
 

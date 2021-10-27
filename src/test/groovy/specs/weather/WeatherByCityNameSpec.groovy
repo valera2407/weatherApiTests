@@ -8,10 +8,10 @@ class WeatherByCityNameSpec extends Specification {
     def "search weather by city name"() {
 
         given: "set base URI"
-        def httpRequest = new HTTPCreator('https://api.openweathermap.org')
+        def httpRequest = new HTTPCreator('https://api.openweathermap.org', 'json')
 
         when: "set path and city name, response language, count and API key"
-        def httpResponse = httpRequest.getRequestJSON('/data/2.5/forecast', [q: city, lang: lan, cnt: listSize, APPID: '187c05111c48c6e4033a664f5951aece'])
+        def httpResponse = httpRequest.getRequest('/data/2.5/forecast', [q: city, lang: lan, cnt: listSize, APPID: '187c05111c48c6e4033a664f5951aece'])
 
         then: "check that response have different count and it come with another language"
         assert httpResponse.list.weather.get(0).description == weather
@@ -19,8 +19,8 @@ class WeatherByCityNameSpec extends Specification {
 
         where:
         city           | lan  | listSize || weather              | numberOfDays
-        'London'       | 'en' | 1        || ['few clouds'] | 1
+        'London'       | 'en' | 1        || ['overcast clouds'] | 1
         'Kharkiv'      | 'ru' | 3        || ['ясно']             | 3
-        'Rechtenstein' | 'de' | 2        || ['Leichter Regen']   | 2
+        'Rechtenstein' | 'de' | 2        || ['Überwiegend bewölkt']   | 2
     }
 }

@@ -7,11 +7,11 @@ class DailyCountSpec extends Specification {
 
     def "Check that response can have different size"() {
         given: "set base URI, geographic coordinate and list size"
-        def httpRequest = new HTTPCreator('https://api.openweathermap.org')
+        def httpRequest = new HTTPCreator('https://api.openweathermap.org', 'json')
         def query = [lon: longitude, lat: latitude, cnt: count, APPID: 'b2ce5b9466a4cdcec5e7a6bf11465c5a']
 
         when: "Sent request"
-        def httpResponse = httpRequest.getRequestJSON('/data/2.5/forecast/daily', query)
+        def httpResponse = httpRequest.getRequest('/data/2.5/forecast/daily', query)
 
         then: "Check that response have status code 200"
         assert httpResponse.cod == '200'
@@ -32,11 +32,11 @@ class DailyCountSpec extends Specification {
 
     def "Check that response can`t have size smaller that 1 and bigger that 17"() {
         given: "set base URI, geographic coordinate and list size"
-        def httpRequest = new HTTPCreator('https://api.openweathermap.org')
+        def httpRequest = new HTTPCreator('https://api.openweathermap.org', 'json')
         def query = [lon: longitude, lat: latitude, cnt: count, APPID: 'b2ce5b9466a4cdcec5e7a6bf11465c5a']
 
         when: "Sent request"
-        def httpResponse = httpRequest.getRequestJSON('/data/2.5/forecast/daily', query)
+        def httpResponse = httpRequest.getRequest('/data/2.5/forecast/daily', query)
 
         then: "Check that response have status cod 400"
         assert httpResponse.cod == '400'

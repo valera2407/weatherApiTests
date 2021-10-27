@@ -7,11 +7,11 @@ class DailyBaseNegativeSpec extends Specification {
 
     def "Check daily forecast with isn`t right city name"() {
         given: "set base URI, city name and API key"
-        def httpRequest = new HTTPCreator('https://api.openweathermap.org')
+        def httpRequest = new HTTPCreator('https://api.openweathermap.org', 'json')
         def query = [q: city, APPID: 'b2ce5b9466a4cdcec5e7a6bf11465c5a']
 
         when: "Sent request"
-        def httpResponse = httpRequest.getRequestJSON('/data/2.5/forecast/daily', query)
+        def httpResponse = httpRequest.getRequest('/data/2.5/forecast/daily', query)
 
         then: "Check that response have status cod 404"
         assert httpResponse.cod == '404'
@@ -25,11 +25,11 @@ class DailyBaseNegativeSpec extends Specification {
 
     def "Check daily forecast with isn`t right city ID"() {
         given: "set base URI, city ID and API key"
-        def httpRequest = new HTTPCreator('https://api.openweathermap.org')
+        def httpRequest = new HTTPCreator('https://api.openweathermap.org', 'json')
         def query = [id: cityId, APPID: 'b2ce5b9466a4cdcec5e7a6bf11465c5a']
 
         when: "Sent request"
-        def httpResponse = httpRequest.getRequestJSON('/data/2.5/forecast/daily', query)
+        def httpResponse = httpRequest.getRequest('/data/2.5/forecast/daily', query)
 
         then: "Check that response have status cod 404"
         assert httpResponse.cod == '404'
@@ -46,11 +46,11 @@ class DailyBaseNegativeSpec extends Specification {
 
     def "Check daily forecast with isn`t right city ZIP code"() {
         given: "set base URI, city ZIP code and API key"
-        def httpRequest = new HTTPCreator('https://api.openweathermap.org')
+        def httpRequest = new HTTPCreator('https://api.openweathermap.org', 'json')
         def query = [zip: cityZip, APPID: 'b2ce5b9466a4cdcec5e7a6bf11465c5a']
 
         when: "Sent request"
-        def httpResponse = httpRequest.getRequestJSON('/data/2.5/forecast/daily', query)
+        def httpResponse = httpRequest.getRequest('/data/2.5/forecast/daily', query)
 
         then: "Check that response have status cod 404"
         assert httpResponse.cod == '404'
@@ -64,11 +64,11 @@ class DailyBaseNegativeSpec extends Specification {
 
     def "Check daily forecast with isn`t right city geographic coordinate"() {
         given: "set base URI, "
-        def httpRequest = new HTTPCreator('https://api.openweathermap.org')
+        def httpRequest = new HTTPCreator('https://api.openweathermap.org', 'json')
         def query = [lon: longitude, lat: latitude, APPID: 'b2ce5b9466a4cdcec5e7a6bf11465c5a']
 
         when: "Sent request"
-        def httpResponse = httpRequest.getRequestJSON('/data/2.5/forecast/daily', query)
+        def httpResponse = httpRequest.getRequest('/data/2.5/forecast/daily', query)
 
         then: "Check that response have status cod 400"
         assert httpResponse.cod == '400'
